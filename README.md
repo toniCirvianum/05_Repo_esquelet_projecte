@@ -52,8 +52,6 @@ Aquest repositori és el punt de partida per desenvolupar el projecte de la UD2.
 └── README.md                         # Aquesta documentació
 ```
 
-> S'han omès els fitxers interns de `vendor/` i `.git/` perquè no formen part del codi que haurà de desenvolupar l'alumnat.
-
 ### Funcionament MVC
 
 1. **`index.php`** inicia la sessió, carrega les dependències i les variables d'entorn, registra les rutes i invoca el `Router`.
@@ -77,14 +75,7 @@ Obre un terminal a la carpeta on hi ha `compose.yml` i, si no existeix `.env`, c
 cp .env.example .env
 ```
 
-Revisa els ports i les credencials de MySQL. **Important:** al ZIP rebut, `.env.example` no inclou dues variables que sí que utilitza `compose.yml`. Afegeix-hi aquests valors al `.env`:
-
-```dotenv
-MAILPIT_PORT=8025
-DB_VOLUME_NAME=ud2_mysql_data
-```
-
-Pots canviar-los si aquests valors ja estan ocupats o si necessites un nom de volum diferent. Les altres variables són `APP_PORT`, `PHPMYADMIN_PORT`, `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD` i `DB_ROOT_PASSWORD`.
+Revisa els ports i les credencials de MySQL. Cal definir les variables del `.env' abans d'aixevar el projecte.
 
 ### 3. Construir i iniciar els contenidors
 
@@ -92,17 +83,15 @@ Pots canviar-los si aquests valors ja estan ocupats o si necessites un nom de vo
 docker compose up -d --build
 ```
 
-El servei PHP espera que MySQL estigui preparat abans d'arrencar. El contenidor PHP instal·la les dependències declarades a `composer.json` mitjançant `composer install` durant l'inici.
-
 ### 4. Accedir als serveis
 
 Amb els ports proposats al `.env.example` i el valor suggerit per a Mailpit:
 
 | Servei | Adreça |
 |---|---|
-| Aplicació PHP | http://localhost:8089 |
-| phpMyAdmin | http://localhost:8090 |
-| Mailpit | http://localhost:8025 |
+| Aplicació PHP | http://localhost:xxxx |
+| phpMyAdmin | http://localhost:xxxx |
+| Mailpit | http://localhost:xxxx |
 
 A phpMyAdmin, utilitza el nom d'usuari i la contrasenya definits a `DB_USER` i `DB_PASSWORD`.
 
@@ -114,7 +103,7 @@ En visitar **`/`**, `HomeController` comprova si existeix la taula `products`. S
 2. `Seeder` hi insereix set productes de prova.
 3. `Product` consulta els registres i la vista inicial els mostra en una taula.
 
-En visites posteriors, si la taula ja existeix, **no es tornen a inserir** aquests set productes. Actualment el projecte registra les rutes **`/`** i **`/error`**. Altres enllaços que apareixen a la vista, com `/products` o `/products/{id}`, necessiten rutes i controladors addicionals per funcionar.
+En visites posteriors, si la taula ja existeix, **no es tornen a inserir** aquests set productes. 
 
 ## Aturar i tornar a iniciar el projecte
 
