@@ -1,8 +1,5 @@
 <?php
 
-// La sessió conserva les dades entre l'anada a Google i el retorn.
-session_start();
-
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/autoload.php';
 
@@ -11,9 +8,7 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 use App\Core\Router;
-use App\Controllers\LoginController;
 use App\Controllers\HomeController;
-use App\Controllers\ProductController;
 
 
 $router = new Router();
@@ -29,17 +24,10 @@ $router->get('/', [HomeController::class, 'index']);
 $router->get('/error',[HomeController::class,'notFound']);
 
 
-// Rutes públiques d'autenticació.
-$router->get('/login', [LoginController::class, 'login']);
-$router->get('/auth/google', [LoginController::class, 'redirectToGoogle']);
-$router->get('/auth/google/callback', [LoginController::class, 'googleCallback']);
+//Rutes de autenticació publiques
 
-// El controlador haurà de comprovar la sessió per accedir al perfil.
-$router->get('/profile', [LoginController::class, 'profile']);
-$router->post('/logout', [LoginController::class, 'logout']);
 
-// Part interna de l'aplicació: pendent de protegir amb la sessió.
-$router->get('/products', [ProductController::class, 'index']);
+//Rutes autenticacio privades
 
 
 
